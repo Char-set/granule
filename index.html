@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			.canvasview {
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+			
+			.help {
+				position: fixed;
+				width: 50px;
+				height: 50px;
+				line-height: 50px;
+				top: 20px;
+				right: 20px;
+				background-color: rgba(255,255,255,0.8);
+				text-align: center;
+				font-size: 24px;
+				cursor: pointer;
+				z-index: 1000;
+			}
+			.help:hover {
+				opacity: 0.8;
+			}
+			.helplist {
+				position: fixed;
+				width: 400px;
+				height: 100%;
+				right: 0;
+				top: 0;
+				background-color: rgba(255,255,255,0.7);
+				box-sizing: border-box;
+				padding: 20px;
+				z-index: 100;
+			}
+			.title {
+				padding-top: 50px;
+				font-size: 24px;
+			}
+			.onecmd {
+				margin-top: 50px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="canvasview"></div>
+		
+		<div class="help">?</div>
+		<div class="helplist" style="display: none;">
+			
+			<div class="title">按 Ctrl + F9 弹出命令行</div>
+			
+			<div class="onecmd">
+				<h2>命令： rect w h</h2>
+				<p>作用： 展示一个矩形；宽度w， 高度h</p>
+				<p>例如： rect 10 6</p>
+			</div>
+			<div class="onecmd">
+				<h2>命令： echo string</h2>
+				<p>作用： 显示一段字符串</p>
+				<p>例如： echo hello</p>
+			</div>
+			
+			<div style="margin-top: 100px;">
+				提示: 粒子排列规则为纵向排列，当粒子数量不够的时候，则右侧为空！
+			</div>
+		</div>
+	</body>
+	
+	<script type="text/javascript" src="granule.js" ></script>
+	<script>
+		document.querySelector(".help").addEventListener("click", function(){
+			var cl = document.querySelector(".helplist");
+			if (cl.style.display == "block") {
+				cl.style.display = "none";
+			} else {
+				cl.style.display = "block";
+			}
+		});
+	</script>
+	
+	
+	<script>
+		
+		var setting = {
+			"el": ".canvasview",		// （必选）指定一个父容器
+//			"width": 600,				// （可选）宽度：不写默认为父容器的大小
+//			"height": 400,				// （可选）高度：
+			"bgcolor": "#222222",		// （可选）画布的背景颜色
+			"color": "#ffffff",			// （可选）粒子的颜色
+			"concentration": 0.5,		// （可选）浓度
+			"radius": 5,				// （可选）例子半径
+			"opacity": 0.9,				// （可选）粒子透明度
+			"duration": 16,				// （可选）运动的时间（秒）大概值不一定精确
+			"rangeRadius": 512,			// （可选）粒子运动的范围	
+//			"tweenType": "",			// （可选）粒子运动的方式，不写表示每一个粒子随机一个方式，"easeInOutQuad" || "easeInOutCubic" || "easeInOutBack" || "easeOutBounce"
+//			"tweenAni": "",				// （可选）当粒子进行自定义动画的时候使用那个缓动，不指定则使用 easeInOutBack
+		}
+		
+		var test = new granule(setting);	// 设置动画的属性
+		test.startAnimation();				// 启动，开始运行
+		
+//		test.echo();
+		
+	</script>
+	
+</html>
